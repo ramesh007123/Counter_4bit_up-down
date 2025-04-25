@@ -1,4 +1,4 @@
-# Counter_4bit_up-down
+## Counter_4bit_up-down
 
 ## Aim:
 
