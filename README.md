@@ -44,10 +44,50 @@ Functional Simulation:
 
 
 ## Fig 2: Invoke the Cadence Environment
+![WhatsApp Image 2025-04-26 at 00 48 32_df77dba8](https://github.com/user-attachments/assets/1f201a16-6a10-4d04-a5d3-2b8113c844c5)
 
 
 ## Creating Source Code:
 
+    `timescale 1ns/1ns
+     module counter(clk,m,rst,count);
+     input clk,m,rst;
+     output reg [3:0] count;
+     always@(posedge clk or negedge rst)
+     begin
+     if (!rst)
+     count=0;
+     else if(m)
+     count=count+1;
+     else
+     count=count-1;
+     end
+     endmodule
+
+
+
+     `timescale 1ns/1ns
+     module counter_test;
+     reg clk,rst,m;
+     wire [3:0] count;
+     initial
+     begin
+     clk=0;
+     rst=0;#5;
+     rst=1;
+     end
+     initial
+     begin
+     m=1;
+     #160 m=0;
+     end
+     counter dut(clk,m,rst,count);
+     always #5 clk=~clk;
+     initial $monitor("Time=%t rst=%b clk=%b count=%b" , $time,rst,clk,count);
+     initial
+     #320 $finish;
+     endmodule
+     
 	In the Terminal, type gedit <filename>.v or <filename>.vhdl depending on the HDL Language you are to use (ex: 4b_up_downCount.v).
 
 	A Blank Document opens up into which the following source code can be typed down.
@@ -76,12 +116,14 @@ Functional Simulation:
 It will invoke the nclaunch window for functional simulation we can compile,elaborate and simulate it using Multiple step
 
 ## Fig 3: Setting Multi-step simulation
+![WhatsApp Image 2025-04-26 at 00 48 31_d370f101](https://github.com/user-attachments/assets/241f6b6c-e9d0-4a6a-b820-a32fefd0f467)
 
 Select Multiple Step and then select “Create cds.lib File” as shown in below figure
 
 Click the cds.lib file and save the file by clicking on Save option
 
 ## Fig 4: cds.lib file Creation
+![WhatsApp Image 2025-04-26 at 00 01 05_3c950600](https://github.com/user-attachments/assets/e148d345-d521-4477-a601-3e143f209d7a)
 
 	Save cds.lib file and select the correct option for cds.lib file format based on the  HDL Language and Libraries used.
 
@@ -90,6 +132,7 @@ Click the cds.lib file and save the file by clicking on Save option
 	We are simulating verilog design without using any libraries
 
 ## Fig 5: Selection of Don’t include any libraries
+![WhatsApp Image 2025-04-26 at 00 46 19_a5e6d6bd](https://github.com/user-attachments/assets/50232ff9-1b76-4d36-853c-dd396ed5f78f)
 
 	A Click “OK” in the “nclaunch: Open Design Directory” window
 
@@ -100,6 +143,7 @@ Click the cds.lib file and save the file by clicking on Save option
 	Worklib is the directory where all the compiled codes are stored while Snapshot will have output of elaboration which in turn goes for simulation
 
 ## Fig 6: Nclaunch Window
+![WhatsApp Image 2025-04-25 at 21 56 43_203135bd](https://github.com/user-attachments/assets/fa4190f5-c8d7-4a38-acfb-b976c6cc7a31)
 
 To perform the function simulation, the following three steps are involved Compilation, Elaboration and Simulation.
 
@@ -124,6 +168,7 @@ i.e Cadence IES command for compile: ncverilog +access+rwc -compile fa.v
 Worklib is the directory where all the compiled codes are stored while Snapshot will have output of elaboration which in turn goes for simulation 
 
 ## Fig 7: Compiled database in worklib
+![WhatsApp Image 2025-04-25 at 21 56 43_203135bd](https://github.com/user-attachments/assets/192a0dab-cc5c-4beb-8871-e7f5946402b3)
 
 	After compilation it will come under worklib you can see in right side window
 
@@ -153,6 +198,7 @@ It contains statements that map logical library names to their physical director
 	After elaboration the file will come under snapshot. Select the test bench and simulate it. 
 
 ## Fig 8: Elaboration Launch Option
+![WhatsApp Image 2025-04-25 at 21 56 43_200d3b6a](https://github.com/user-attachments/assets/b600579b-1c77-4baf-9f38-247ee5a85786)
 
 ### Step 3: Simulation: – Simulate with the given test vectors over a period of time to observe the output behaviour. 
 
@@ -165,10 +211,13 @@ It contains statements that map logical library names to their physical director
 	Steps for simulation – Run the simulation command with simulator options
 
 ## Fig 9: Design Browser window for simulation
+![WhatsApp Image 2025-04-26 at 00 43 58_3aecf3a0](https://github.com/user-attachments/assets/2647ebc7-6bcc-4524-b387-60184584c675)
 
 ## Fig 10: Simulation Waveform Window
+![WhatsApp Image 2025-04-25 at 21 56 44_b5e79299](https://github.com/user-attachments/assets/28258723-fee9-4837-87bf-645d133fc948)
 
 ## Fig 11: Simulation Waveform Window
+![WhatsApp Image 2025-04-26 at 00 32 45_0d6b1d36](https://github.com/user-attachments/assets/cf49f0f8-050d-42a1-86b7-8875310f5213)
 
 ### Result
 
